@@ -77,7 +77,7 @@ angular.module('herd', [
     url: '/home',
     views: {
       'tab-home': {
-        templateUrl: 'templates/tab-home.html',
+        templateUrl: 'templates/meetup-session-list.html',
         controller: 'HomeCtrl'
       }
     }
@@ -87,7 +87,7 @@ angular.module('herd', [
       url: '/sessionDetails',
       views: {
         'tab-home': {
-          templateUrl: 'templates/session-details.html',
+          templateUrl: 'templates/meetup-session-details.html',
           controller: 'sessionDetailsController'
         }
       }

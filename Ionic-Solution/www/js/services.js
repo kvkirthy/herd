@@ -12,16 +12,16 @@ angular.module('herd.services', [])
             return deferred.promise;
         };
     })
-
+    
 .service('oAuthService', function($q, $http, $window){
 
         var getTokenFromStorage = function(){
             return $window.localStorage.getItem("accessToken");
-        }
+        };
 
         var saveTokenToStorage = function(tokenValue){
             $window.localStorage.setItem("accessToken", tokenValue);
-        }
+        };
 
         var authenticateWithMeetup = function(){
             var deferred = q.defer();
@@ -38,7 +38,5 @@ angular.module('herd.services', [])
                 });
             return deferred.promise;
         };
-
-
 
     });

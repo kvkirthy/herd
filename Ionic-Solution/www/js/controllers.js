@@ -1,25 +1,9 @@
 angular.module('herd.controllers', [])
 
 .controller('HomeCtrl', function($scope, meetupSessionDataService) {
-/*  $scope.sessions = [
-    {
-      title: 'Session1',
-      description: 'Sample description for Session1',
-      imageUrl: 'img/push-header.png'
-    },
-    {
-      title: 'Session2',
-      description: 'Sample description for Session2',
-      imageUrl: 'img/push-preview.png'
-    },
-    {
-      title: 'Session3',
-      description: 'Sample description for Session3',
-      imageUrl: 'img/users-header.png'
-    }
-  ];*/
 
       $scope.sessions = [];
+
       meetupSessionDataService.getMeetupSessionList().then(function(results){
         if(results && _.isArray(results)){
           _.each(results, function(item){
@@ -36,7 +20,6 @@ angular.module('herd.controllers', [])
         }
       }, function(error){
         //TODO: Handle error and show alert message
-
       });
 
 })
