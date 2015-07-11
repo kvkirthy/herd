@@ -98,41 +98,7 @@ angular.module('herd', [
     url: '/user',
     views: {
       'tab-user': {
-        templateUrl: 'templates/tab-user.html',
-        controller: 'UserCtrl'
-      }
-    }
-  })
-
-  // Ionic Push tab
-  .state('tab.push', {
-    url: '/push',
-    views: {
-      'tab-push': {
-        templateUrl: 'templates/tab-push.html',
-        controller: 'PushCtrl'
-      }
-    }
-  })
-
-  // Ionic Deploy tab
-  .state('tab.deploy', {
-    url: '/deploy',
-    views: {
-      'tab-deploy': {
-        templateUrl: 'templates/tab-deploy.html',
-        controller: 'DeployCtrl'
-      }
-    }
-  })
-
-  // Ionic Analytics tab
-  .state('tab.analytics', {
-    url: '/analytics',
-    views: {
-      'tab-analytics': {
-        templateUrl: 'templates/tab-analytics.html',
-        controller: 'AnalyticsCtrl'
+        templateUrl: 'templates/tab-user.html'
       }
     }
   });
