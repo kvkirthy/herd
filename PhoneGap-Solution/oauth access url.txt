@@ -1,0 +1,1 @@
+https://secure.meetup.com/oauth2/authorize?client_id=t72ikt2o1g0t032nr8ee7hcam9&response_type=code&redirect_uri=http://localhost/herd

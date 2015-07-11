@@ -1,0 +1,38 @@
+<div class="page-section" layout="column" layout-fill>
+    <md-toolbar layout="row">
+        <md-button flex="10" ng-click="toggleSideMenu()">
+            <div class="icon icon-action-white icon-action-white-ic_view_headline_white_24dp"></div>
+        </md-button>
+        &nbsp;&nbsp;
+        <h3 flex="33">{{pageTitle}}</h3>
+    </md-toolbar>
+    <div layout="row" flex>
+        <md-sidenav flex md-component-id="left" class="md-sidenav-left smaller-sidenav md-whiteframe-z2" >
+            <md-toolbar layout-padding layout-align="start center" layout="row">
+                <label >Options</label>
+            </md-toolbar>
+            <md-content flex layout-padding>
+                <md-list flex>
+                    <md-list-item>
+                        <md-button ng-click="navigateToSessions()" layout="row" layout-align="start start" class="md-hue1" style="min-width:150px">Sessions</md-button>
+                    </md-list-item>
+                    <md-list-item>
+                            <md-button layout="row" layout-align="start start" class="md-hue1" style="min-width:150px">My Scores</md-button>
+                    </md-list-item>
+                    <md-list-item>
+                            <md-button ng-click="navigateToUserProfile()" layout="row" layout-align="start start" flex class="md-hue1" style="min-width:150px">Profile</md-button>
+                    </md-list-item>
+                    <md-list-item>
+                            <md-button layout="row" layout-align="start start" class="md-hue1" style="min-width:150px">Check-in</md-button>
+                    </md-list-item>
+                    <md-list-item>
+                            <md-button layout="row" layout-align="start start" flex class="md-hue1" style="min-width:150px">About Herd</md-button>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </md-sidenav>
+        <md-content layout-padding id="content" flex>
+            <div ui-view></div>
+        </md-content>
+    </div>
+</div>

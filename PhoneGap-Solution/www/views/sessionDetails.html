@@ -1,0 +1,55 @@
+<section class="page-section" flex layout="column">
+    <md-toolbar class="md-primary" layout="row">
+        <div class="md-toolbar-tools" >
+            <md-button flex="25" layout-align="left center" layout="row" ng-click="goBack()">
+                <div class="icon icon-navigation-white icon-navigation-white-ic_chevron_left_white_24dp"></div>
+                &nbsp;
+                <div>Back</div>
+            </md-button>
+            <div flex="50">&nbsp;</div>
+            <md-button flex="25" ng-click="toggleSideMenu()" layout="row">
+                Feedback
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <div layout="column" flex>
+
+        <md-content class="md-padding" layout="column" flex>
+            <div style="min-height: 160px" layout="row" layout-align="center center"  >
+                <img ng-src="{{session.primaryImage}}" style="max-height: 160px" />
+            </div>
+
+                <h3>{{session.title}}</h3>
+                <div ng-bind-html="session.description"></div>
+        </md-content>
+
+        <md-sidenav flex md-component-id="right" class="md-sidenav-right md-whiteframe-z2" >
+           <md-toolbar flex class="md-primary" layout="row">
+               <div layout-padding>Feedback</div>
+           </md-toolbar>
+           <md-content class="md-padding" flex layout="column">
+                <div layout="row"><span flex="50">Question 1</span> <span flex="40">&nbsp;</span> <span flex="10">{{question1}}</span></div>
+                <md-slider flex min="1" max="5" ng-model="question1"></md-slider>
+               <div layout="row"><span flex="50">Question 2</span> <span flex="40">&nbsp;</span> <span flex="10">{{question2}}</span></div>
+                <md-slider flex min="1" max="5" ng-model="question2"></md-slider>
+               <div layout="row"><span flex="50">Question 3</span> <span flex="40">&nbsp;</span> <span flex="10">{{question3}}</span></div>
+                <md-slider flex min="1" max="5" ng-model="question3"></md-slider>
+               <div layout="row"><span flex="50">Question 4</span> <span flex="40">&nbsp;</span> <span flex="10">{{question4}}</span></div>
+                <md-slider flex min="1" max="5" ng-model="question4"></md-slider>
+               <div layout="row"><span flex="50">Question 5</span> <span flex="40">&nbsp;</span> <span flex="10">{{question5}}</span></div>
+                <md-slider flex min="1" max="5" ng-model="question5"></md-slider>
+
+               <md-input-container>
+                   <label>Additional Comments?</label>
+                   <textarea></textarea>
+               </md-input-container>
+               <md-button class="md-raised md-primary">Go</md-button>
+
+           </md-content>
+        </md-sidenav>
+    </div>
+
+
+
+</section>
