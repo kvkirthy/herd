@@ -83,12 +83,12 @@ angular.module('herd', [
     }
   })
 
-  .state('tab.sessionDetails',{
-      url: '/sessionDetails',
+  .state('tab.meetupSessionDetails',{
+      url: '/meetupSessionDetails',
       views: {
         'tab-home': {
           templateUrl: 'templates/meetup-session-details.html',
-          controller: 'sessionDetailsController'
+          controller: 'meetupSessionDetailsController'
         }
       }
   })

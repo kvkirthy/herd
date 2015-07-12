@@ -3,16 +3,15 @@
         <div class="list card">
             <div class="item item-avatar">
                 <img src="img/users-header.png"/>
-                <h2>Session Title</h2>
-                <div>Coordinated by ngHyderabad</div>
+                <h2>{{selectedMeetupSession.title}}</h2>
+                <div ng-show="selectedMeetupSession.organizerName">Coordinated by {{selectedMeetupSession.organizerName}}</div>
             </div>
             <div class="item item-body">
-                A limit of 100 is set for attendees. Currently 100 have agreed to come. And 44 are in wait list.
+                <span ng-show="selectedMeetupSession.rsvpLimit"> A limit of {{selectedMeetupSession.rsvpLimit}} is set for attendees.</span> <span ng-show="selectedMeetupSession.rsvpCount && selectedMeetupSession.waitListCount">Currently {{selectedMeetupSession.rsvpCount}} have agreed to come. And {{selectedMeetupSession.waitListCount}} are in wait list.</span>
             </div>
             <div class="item item-body">
-                <div class="json-value datatype-string" title="<p>Angular2 is slowly shaping-up and it is in alpha stage and time to explore new syntax and everything about it.</p> <p>Here is what we will talk \ present:<br/>1) What is AngularJS 2.0 all about? Why a rewrite is needed?<br/>2) What are the challenges?<br/>3) Change Detection<br/>4) Dependency Injection<br/>5) Templating<br/>6) What is ShadowDOM?<br/>7) Routing<br/>8) Documentation<br/>9) Benchmarking<br/>10) Hello Angular2 example and syntax changes<br/>11) IDE support (Web Storm, Visual Studio, Sublime, Atom, Brackets etc)</p> <p>** You can RSVP now but we will have&nbsp;questioner and&nbsp;&nbsp;re-confirmation 1 or 2 days before the meetup because of 50-60% no show-ups. I hope you understand why we need to do this.</p>">&lt;p&gt;Angular2 is slowly shaping-up and it is in alpha stage and time to explore new syntax and everything about it.&lt;/p&gt; &lt;p&gt;Here is what we will talk \ present:&lt;br/&gt;1) What is AngularJS 2.0 all about? Why a rewrite is needed?&lt;br/&gt;2) What are the challenges?&lt;br/&gt;3) Change Detection&lt;br/&gt;4) Dependency Injection&lt;br/&gt;5) Templating&lt;br/&gt;6) What is ShadowDOM?&lt;br/&gt;7) Routing&lt;br/&gt;8) Documentation&lt;br/&gt;9) Benchmarking&lt;br/&gt;10) Hello Angular2 example and syntax changes&lt;br/&gt;11) IDE support (Web Storm, Visual Studio, Sublime, Atom, Brackets etc)&lt;/p&gt; &lt;p&gt;** You can RSVP now but we will have&nbsp;questioner and&nbsp;&nbsp;re-confirmation 1 or 2 days before the meetup because of 50-60% no show-ups. I hope you understand why we need to do this.&lt;/p&gt;</div>
+                <span ng-bind-html="selectedMeetupSession.description"></span>
             </div>
-
         </div>
     </ion-content>
 </ion-view>

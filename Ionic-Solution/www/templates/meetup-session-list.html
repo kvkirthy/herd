@@ -1,8 +1,8 @@
 <ion-view view-title="Herd">
   <ion-content style="background: #e8ebf1;" class="padding">
       <ion-list>
-        <ion-item ng-repeat="session in sessions" class="item-thumbnail-left" ui-sref="tab.sessionDetails()">
-          <img src="" ng-src="{{session.imageUrl}}" alt=""/>
+        <ion-item ng-repeat="session in sessions" class="item-thumbnail-left" ng-click="goToDetails(session)">
+          <img src="{{session.imageUrl}}" />
           <div><strong>{{session.title}}</strong></div>
           <span class="item-text-wrap">
               {{session.rsvpCount}} are joining the session.
