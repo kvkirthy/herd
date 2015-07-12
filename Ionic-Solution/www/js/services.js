@@ -3,7 +3,7 @@ angular.module('herd.services', [])
 .service('meetupSessionDataService', function($q, $http){
         this.getMeetupSessionList = function(){
             var deferred = $q.defer();
-            $http.get('https://api.meetup.com/2/events?&sign=true&photo-host=public&group_urlname=ngHyderabad&status=proposed&page=20&key=32c1922324d801c264c29715164859#results/0/description')
+            $http.get('https://api.meetup.com/2/events?&sign=true&photo-host=public&text_format=plain&group_urlname=ngHyderabad&status=proposed&page=20&key=32c1922324d801c264c29715164859#results/0/description')
                 .success(function(data){
                     deferred.resolve(data.results);
                 })

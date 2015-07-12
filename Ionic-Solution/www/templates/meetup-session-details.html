@@ -3,14 +3,14 @@
         <div class="list card">
             <div class="item item-avatar">
                 <img src="img/users-header.png"/>
-                <h2>{{selectedMeetupSession.title}}</h2>
+                <strong>{{selectedMeetupSession.title}}</strong>
                 <div ng-show="selectedMeetupSession.organizerName">Coordinated by {{selectedMeetupSession.organizerName}}</div>
             </div>
             <div class="item item-body">
-                <span ng-show="selectedMeetupSession.rsvpLimit"> A limit of {{selectedMeetupSession.rsvpLimit}} is set for attendees.</span> <span ng-show="selectedMeetupSession.rsvpCount && selectedMeetupSession.waitListCount">Currently {{selectedMeetupSession.rsvpCount}} have agreed to come. And {{selectedMeetupSession.waitListCount}} are in wait list.</span>
+                <span ng-bind-html="selectedMeetupSession.description"></span>
             </div>
             <div class="item item-body">
-                <span ng-bind-html="selectedMeetupSession.description"></span>
+                <span ng-show="selectedMeetupSession.rsvpLimit"> A limit of {{selectedMeetupSession.rsvpLimit}} is set for attendees.</span> <span ng-show="selectedMeetupSession.rsvpCount && selectedMeetupSession.waitListCount">Currently {{selectedMeetupSession.rsvpCount}} have agreed to come. And {{selectedMeetupSession.waitListCount}} are in wait list.</span>
             </div>
         </div>
     </ion-content>
