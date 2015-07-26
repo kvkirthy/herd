@@ -32,8 +32,28 @@ angular.module('herd.controllers', [])
 
 })
 
-.controller('meetupSessionDetailsController', function($scope, stateManager){
+.controller('meetupSessionDetailsController', function($scope, stateManager, $ionicActionSheet, $state){
 
     $scope.selectedMeetupSession = stateManager.selectedMeetupSession;
+
+    $scope.getActions = function(){
+        $ionicActionSheet.show({
+            buttons: [
+                { text: 'Feedback' },
+                { text: 'Share' }
+            ],
+            titleText: 'Actions',
+            cancelText: 'Cancel',
+            cancel: function() {
+                return true;
+            },
+            buttonClicked: function(index) {
+                if(index === 0){
+                    $state.go('tab.feedback');
+                }
+                return true;
+            }
+        });
+    };
 
 });

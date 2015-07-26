@@ -1,14 +1,17 @@
 <ion-view view-title="Herd">
   <ion-content style="background: #e8ebf1;" class="padding">
-      <ion-list>
-        <ion-item ng-repeat="session in sessions" class="item-thumbnail-left" ng-click="goToDetails(session)">
-          <img src="{{session.imageUrl}}" />
-          <div><strong>{{session.title}}</strong></div>
-          <span class="item-text-wrap">
-              {{session.rsvpCount}} are joining the session.
-              <span ng-if="session.waitListCount"> {{session.waitListCount}} are waiting for a confirmation from organizers</span>
-          </span>
-        </ion-item>
-      </ion-list>
+      <div class="list card">
+
+          <ion-list >
+              <ion-item ng-repeat="session in sessions" class="item item-avatar-left" ng-click="goToDetails(session)">
+                  <img src="{{session.imageUrl}}" />
+                  <h2>{{session.title}}</h2>
+                  <p >
+                      <span ng-if="session.rsvpCount">{{session.rsvpCount}} are joining the session.</span>
+                      <span ng-if="session.waitListCount" class="item-text-wrap"> {{session.waitListCount}} are waiting for a confirmation from organizers</span>
+                  </p>
+              </ion-item>
+          </ion-list>
+      </div>
   </ion-content>
 </ion-view>

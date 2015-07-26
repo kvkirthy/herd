@@ -12,12 +12,18 @@ namespace Herd.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class OAuthUser
+    public partial class MeetupSession
     {
+        public MeetupSession()
+        {
+            this.FeedbackQuestions = new HashSet<FeedbackQuestion>();
+        }
+    
         public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Key { get; set; }
-        public string AdditionalData { get; set; }
-        public System.DateTime DataTimeKeyObtained { get; set; }
+        public string SessionTitle { get; set; }
+        public string MeetupIdentifier { get; set; }
+        public string AdditionalDetails { get; set; }
+    
+        public virtual ICollection<FeedbackQuestion> FeedbackQuestions { get; set; }
     }
 }

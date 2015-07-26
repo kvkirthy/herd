@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -134,6 +135,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\MeetupSessionController.cs" />
+    <Compile Include="DataAccess\FeedbackQuestion.cs">
+      <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\HerdMsSqlDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -152,6 +157,10 @@
     <Compile Include="DataAccess\I_OAuth.cs" />
     <Compile Include="DataAccess\MeetupApiDataAccess.cs" />
     <Compile Include="DataAccess\MeetupOAuth.cs" />
+    <Compile Include="DataAccess\MeetupSession.cs">
+      <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\MeetupSessionDataAccess.cs" />
     <Compile Include="DataAccess\OAuthUser.cs">
       <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
     </Compile>

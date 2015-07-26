@@ -25,6 +25,8 @@ namespace Herd.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<FeedbackQuestion> FeedbackQuestions { get; set; }
+        public virtual DbSet<MeetupSession> MeetupSessions { get; set; }
         public virtual DbSet<OAuthUser> OAuthUsers { get; set; }
     }
 }

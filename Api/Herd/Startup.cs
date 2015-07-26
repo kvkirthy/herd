@@ -25,6 +25,8 @@ namespace Herd
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
 
+            config.MapHttpAttributeRoutes();
+
             config.Routes.MapHttpRoute(
                 "DefaultApi",
                 "api/{controller}",
@@ -33,8 +35,7 @@ namespace Herd
                     id = RouteParameter.Optional
                 });
 
-
-
+            
             app.UseWebApi(config);
 
         }

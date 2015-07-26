@@ -1,16 +1,20 @@
 <ion-view view-title="Session Details">
+    <ion-nav-title>
+        <h2 class="title">Session Details</h2>
+        <button class="button pull-right" ng-click="getActions()">More</button>
+    </ion-nav-title>
     <ion-content style="background: #e8ebf1;" class="padding">
         <div class="list card">
-            <div class="item item-avatar">
+            <div class="item item-avatar-left">
                 <img src="img/users-header.png"/>
-                <strong>{{selectedMeetupSession.title}}</strong>
-                <div ng-show="selectedMeetupSession.organizerName">Coordinated by {{selectedMeetupSession.organizerName}}</div>
+                <h2>{{selectedMeetupSession.title}}</h2>
+                <p ng-show="selectedMeetupSession.organizerName">Coordinated by {{selectedMeetupSession.organizerName}}</p>
             </div>
             <div class="item item-body">
-                <span ng-bind-html="selectedMeetupSession.description"></span>
+                <p ng-bind-html="selectedMeetupSession.description"></p>
             </div>
             <div class="item item-body">
-                <span ng-show="selectedMeetupSession.rsvpLimit"> A limit of {{selectedMeetupSession.rsvpLimit}} is set for attendees.</span> <span ng-show="selectedMeetupSession.rsvpCount && selectedMeetupSession.waitListCount">Currently {{selectedMeetupSession.rsvpCount}} have agreed to come. And {{selectedMeetupSession.waitListCount}} are in wait list.</span>
+                <p ng-show="selectedMeetupSession.rsvpLimit"> A limit of {{selectedMeetupSession.rsvpLimit}} is set for attendees.</span> <span ng-show="selectedMeetupSession.rsvpCount && selectedMeetupSession.waitListCount">Currently {{selectedMeetupSession.rsvpCount}} have agreed to come. And {{selectedMeetupSession.waitListCount}} are in wait list.</p>
             </div>
         </div>
     </ion-content>

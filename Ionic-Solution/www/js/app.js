@@ -101,6 +101,15 @@ angular.module('herd', [
         templateUrl: 'templates/tab-user.html'
       }
     }
+  })
+
+  .state('tab.feedback', {
+    url: '/feedback',
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/tab-feedback.html'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback

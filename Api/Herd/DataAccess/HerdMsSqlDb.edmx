@@ -5,50 +5,166 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MsSqlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="OAuthUser">
+        <EntityType Name="FeedbackQuestion">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AdditionalDetails" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FeedbackQuestionAndMeetupSession">
+          <Key>
+            <PropertyRef Name="MeetupSessionId" />
+            <PropertyRef Name="FeedbackQuestionId" />
+          </Key>
+          <Property Name="MeetupSessionId" Type="int" Nullable="false" />
+          <Property Name="FeedbackQuestionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeetupSessions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MeetupIdentifier" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdditionalDetails" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OAuthUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Key" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdditionalData" Type="nvarchar" MaxLength="50" />
           <Property Name="DataTimeKeyObtained" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_FeedbackQuestionAndMeetupSession_FeedbackQuestion">
+          <End Role="FeedbackQuestion" Type="Self.FeedbackQuestion" Multiplicity="1" />
+          <End Role="FeedbackQuestionAndMeetupSession" Type="Self.FeedbackQuestionAndMeetupSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeedbackQuestion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeedbackQuestionAndMeetupSession">
+              <PropertyRef Name="FeedbackQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeedbackQuestionAndMeetupSession_MeetupSessions">
+          <End Role="MeetupSessions" Type="Self.MeetupSessions" Multiplicity="1" />
+          <End Role="FeedbackQuestionAndMeetupSession" Type="Self.FeedbackQuestionAndMeetupSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeetupSessions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeedbackQuestionAndMeetupSession">
+              <PropertyRef Name="MeetupSessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MsSqlModelStoreContainer">
-          <EntitySet Name="OAuthUser" EntityType="Self.OAuthUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedbackQuestion" EntityType="Self.FeedbackQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedbackQuestionAndMeetupSession" EntityType="Self.FeedbackQuestionAndMeetupSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeetupSessions" EntityType="Self.MeetupSessions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OAuthUsers" EntityType="Self.OAuthUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FeedbackQuestionAndMeetupSession_FeedbackQuestion" Association="Self.FK_FeedbackQuestionAndMeetupSession_FeedbackQuestion">
+            <End Role="FeedbackQuestion" EntitySet="FeedbackQuestion" />
+            <End Role="FeedbackQuestionAndMeetupSession" EntitySet="FeedbackQuestionAndMeetupSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeedbackQuestionAndMeetupSession_MeetupSessions" Association="Self.FK_FeedbackQuestionAndMeetupSession_MeetupSessions">
+            <End Role="MeetupSessions" EntitySet="MeetupSessions" />
+            <End Role="FeedbackQuestionAndMeetupSession" EntitySet="FeedbackQuestionAndMeetupSession" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MsSqlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HerdMsSqlEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FeedbackQuestions" EntityType="MsSqlModel.FeedbackQuestion" />
+          <EntitySet Name="MeetupSessions" EntityType="MsSqlModel.MeetupSession" />
+          <AssociationSet Name="FeedbackQuestionAndMeetupSession" Association="MsSqlModel.FeedbackQuestionAndMeetupSession">
+            <End Role="FeedbackQuestion" EntitySet="FeedbackQuestions" />
+            <End Role="MeetupSession" EntitySet="MeetupSessions" />
+          </AssociationSet>
+          <EntitySet Name="OAuthUsers" EntityType="MsSqlModel.OAuthUser" />
+        </EntityContainer>
+        <EntityType Name="FeedbackQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MeetupSessions" Relationship="MsSqlModel.FeedbackQuestionAndMeetupSession" FromRole="FeedbackQuestion" ToRole="MeetupSession" />
+        </EntityType>
+        <EntityType Name="MeetupSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MeetupIdentifier" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FeedbackQuestions" Relationship="MsSqlModel.FeedbackQuestionAndMeetupSession" FromRole="MeetupSession" ToRole="FeedbackQuestion" />
+        </EntityType>
+        <Association Name="FeedbackQuestionAndMeetupSession">
+          <End Type="MsSqlModel.FeedbackQuestion" Role="FeedbackQuestion" Multiplicity="*" />
+          <End Type="MsSqlModel.MeetupSession" Role="MeetupSession" Multiplicity="*" />
+        </Association>
         <EntityType Name="OAuthUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalData" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DataTimeKeyObtained" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="HerdMsSqlEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="OAuthUsers" EntityType="Self.OAuthUser" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MsSqlModelStoreContainer" CdmEntityContainer="HerdMsSqlEntities">
+        <EntitySetMapping Name="FeedbackQuestions">
+            <EntityTypeMapping TypeName="MsSqlModel.FeedbackQuestion">
+              <MappingFragment StoreEntitySet="FeedbackQuestion">
+                <ScalarProperty Name="AdditionalDetails" ColumnName="AdditionalDetails" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeetupSessions">
+            <EntityTypeMapping TypeName="MsSqlModel.MeetupSession">
+              <MappingFragment StoreEntitySet="MeetupSessions">
+                <ScalarProperty Name="AdditionalDetails" ColumnName="AdditionalDetails" />
+                <ScalarProperty Name="MeetupIdentifier" ColumnName="MeetupIdentifier" />
+                <ScalarProperty Name="SessionTitle" ColumnName="SessionTitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FeedbackQuestionAndMeetupSession" TypeName="MsSqlModel.FeedbackQuestionAndMeetupSession" StoreEntitySet="FeedbackQuestionAndMeetupSession">
+            <EndProperty Name="MeetupSession">
+              <ScalarProperty Name="Id" ColumnName="MeetupSessionId" />
+            </EndProperty>
+            <EndProperty Name="FeedbackQuestion">
+              <ScalarProperty Name="Id" ColumnName="FeedbackQuestionId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <EntitySetMapping Name="OAuthUsers">
             <EntityTypeMapping TypeName="MsSqlModel.OAuthUser">
-              <MappingFragment StoreEntitySet="OAuthUser">
+              <MappingFragment StoreEntitySet="OAuthUsers">
+                <ScalarProperty Name="DataTimeKeyObtained" ColumnName="DataTimeKeyObtained" />
+                <ScalarProperty Name="AdditionalData" ColumnName="AdditionalData" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Key" ColumnName="Key" />
-                <ScalarProperty Name="AdditionalData" ColumnName="AdditionalData" />
-                <ScalarProperty Name="DataTimeKeyObtained" ColumnName="DataTimeKeyObtained" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
