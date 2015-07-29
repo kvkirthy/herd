@@ -12,11 +12,17 @@ namespace Herd.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class MeetupSession
+    public partial class FeedbackQuestionAndMeetupSession
     {
-        public int Id { get; set; }
-        public string SessionTitle { get; set; }
-        public string MeetupIdentifier { get; set; }
-        public string AdditionalDetails { get; set; }
+        public FeedbackQuestionAndMeetupSession()
+        {
+            this.FeedbackQuestionResponses = new HashSet<FeedbackQuestionResponse>();
+        }
+    
+        public string MeetupSessionId { get; set; }
+        public int FeedbackQuestionId { get; set; }
+    
+        public virtual FeedbackQuestion FeedbackQuestion { get; set; }
+        public virtual ICollection<FeedbackQuestionResponse> FeedbackQuestionResponses { get; set; }
     }
 }

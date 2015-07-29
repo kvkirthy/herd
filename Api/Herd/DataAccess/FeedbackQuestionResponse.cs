@@ -12,11 +12,15 @@ namespace Herd.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class MeetupSession
+    public partial class FeedbackQuestionResponse
     {
         public int Id { get; set; }
-        public string SessionTitle { get; set; }
-        public string MeetupIdentifier { get; set; }
+        public string MeetupSessionId { get; set; }
+        public int FeedbackQuestionId { get; set; }
+        public Nullable<short> Rating { get; set; }
+        public string FeedbackWriteup { get; set; }
         public string AdditionalDetails { get; set; }
+    
+        public virtual FeedbackQuestionAndMeetupSession FeedbackQuestionAndMeetupSession { get; set; }
     }
 }

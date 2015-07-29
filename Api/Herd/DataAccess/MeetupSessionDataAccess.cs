@@ -1,4 +1,5 @@
-﻿using Herd.Utilities;
+﻿using Herd.Models;
+using Herd.Utilities;
 
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,15 @@ namespace Herd.DataAccess
             {
                 var results = new List<string>();
 
-                var a = _dbContext.MeetupSessions.First();
+                var feedbackQuestionReferences = _dbContext.FeedbackQuestionAndMeetupSessions.Where(p => p.MeetupSessionId == sessionId);               
                 
-                var meetupSession = _dbContext.MeetupSessions.FirstOrDefault(p => p.MeetupIdentifier.Equals(sessionId));
 
-                if(meetupSession != null)
+                if(feedbackQuestionReferences != null)
                 {
-                    meetupSession.FeedbackQuestions.ToList().ForEach(x =>
+
+                    feedbackQuestionReferences.ToList().ForEach(x =>
                     {
-                        results.Add(x.QuestionText);
+                        results.Add(x.FeedbackQuestion.QuestionText);
                     });
 
                     return results;
@@ -41,6 +42,26 @@ namespace Herd.DataAccess
             {
                 Logger.LogError("Error while getting Feedback questions from database.", exception);
                 return null;
+            }
+        }
+
+        public bool AddNewFeedbackResponse(FeedbackResponse feedbackResponse)
+        {
+            try
+            {
+                _dbContext.FeedbackQuestionResponses.Add(new FeedbackQuestionResponse
+                {
+                    MeetupSessionId = feedbackResponse.MeetupSessionId,
+                    FeedbackQuestionId = feedbackResponse.QuestionId,
+                    Rating = feedbackResponse.Rating
+
+                });
+                return true;
+            }
+            catch(Exception exception)
+            {
+                Logger.LogError("Error while updating feedback response ", exception);
+                return false;
             }
         }
     }

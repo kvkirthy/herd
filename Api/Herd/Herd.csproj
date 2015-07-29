@@ -139,6 +139,12 @@
     <Compile Include="DataAccess\FeedbackQuestion.cs">
       <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\FeedbackQuestionAndMeetupSession.cs">
+      <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\FeedbackQuestionResponse.cs">
+      <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\HerdMsSqlDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -165,6 +171,7 @@
       <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\UserDataAccess.cs" />
+    <Compile Include="Models\FeedbackResponse.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
