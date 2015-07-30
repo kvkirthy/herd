@@ -107,7 +107,8 @@ angular.module('herd', [
     url: '/feedback',
     views: {
       'tab-home': {
-        templateUrl: 'templates/tab-feedback.html'
+        templateUrl: 'templates/tab-feedback.html',
+        controller: 'meetupSessionFeedback'
       }
     }
   });

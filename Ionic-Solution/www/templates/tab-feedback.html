@@ -2,42 +2,22 @@
     <ion-title>
         <h2>Feedback</h2>
     </ion-title>
-    <ion-content padding="true">
-        <div>
-            <p>Sample Question 1</p>
-            <div class="item range range-positive">
-                <i class="icon ion-sad-outline"></i>
-                <input type="range" min="1" max="5" value="0" step="1">
-                <i class="icon ion-happy-outline"></i>
+    <ion-content>
+        <div class="list">
+            <div ng-repeat="question in questions" class="item">
+                <div class="item-text-wrap" style="font-size: 9pt;">{{question.question}}</div>
+                <div class="range range-positive">
+                    <i class="icon ion-sad-outline"></i>
+                    <input type="range" min="1" max="5" value="0" step="1">
+                    <i class="icon ion-happy-outline"></i>
+                </div>
+                <input type="text" placeholder="Care to comment? " ng-model="question.comment"/>
             </div>
         </div>
-
-        <div>
-            <p>Sample Question 2</p>
-            <div class="item range range-positive">
-                <i class="icon ion-sad-outline"></i>
-                <input type="range" min="1" max="5" value="0" step="1">
-                <i class="icon ion-happy-outline"></i>
-            </div>
+        <div ng-show="isPageReady">
+            <button class="button button-full button-positive">
+                Submit
+            </button>
         </div>
-
-        <div>
-            <p>Sample Question 3</p>
-            <div class="item range range-positive">
-                <i class="icon ion-sad-outline"></i>
-                <input type="range" min="1" max="5" value="0" step="1">
-                <i class="icon ion-happy-outline"></i>
-            </div>
-        </div>
-
-        <div>
-            <p>Sample Question 4</p>
-            <div class="item range range-positive">
-                <i class="icon ion-sad-outline"></i>
-                <input type="range" min="1" max="5" value="0" step="1">
-                <i class="icon ion-happy-outline"></i>
-            </div>
-        </div>
-
     </ion-content>
 </ion-view>

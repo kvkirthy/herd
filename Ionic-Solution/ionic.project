@@ -1,4 +1,9 @@
 {
   "name": "Herd",
-  "app_id": "db4fadea"
+  "app_id": "db4fadea",
+  "proxies": [
+    {
+      "path": "#/tab/home",
+      "proxyUrl": "https://api.meetup.com"
+    }]
 }
