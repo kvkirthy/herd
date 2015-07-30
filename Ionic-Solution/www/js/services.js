@@ -1,11 +1,18 @@
 angular.module('herd.services', [])
     .constant('stateManager', {})
 .service('meetupSessionDataService', function($q, $http){
-        this.getMeetupSessionList = function(){
+        this.getMeetupSessionList = function(isIncludePastSessions){
             var deferred = $q.defer();
-            $http.get('https://api.meetup.com/2/events?&sign=true&photo-host=public&text_format=plain&group_urlname=ngHyderabad&status=proposed&page=20&key=32c1922324d801c264c29715164859#results/0/description')
+            var status = "upcoming";
+
+            if(isIncludePastSessions){
+                status = status + ",past";
+            }
+
+            $http.get('https://api.meetup.com/2/events?&sign=true&photo-host=public&text_format=plain&group_urlname=ngHyderabad&status=' + status + '&page=20&key=32c1922324d801c264c29715164859#results/0/description')
                 .success(function(data){
-                    deferred.resolve(data.results);
+                    _.sortBy(data.results, function(item){item.time});
+                    deferred.resolve(((data.results) || []).reverse());
                 })
                 .error(function(error){
                     deferred.reject(error);

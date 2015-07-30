@@ -4,14 +4,18 @@ angular.module('herd.controllers', [])
 
         $scope.sessions = [];
 
+        $scope.includePastSessions = false;
+
         function getMeetupSessionList(){
             $ionicLoading.show({
                 noBackdrop: false,
                 template: '<p class="text-center"><div><ion-spinner icon="lines"/></div> <span style="font-size:9pt;">Working on it...</span></p>'
             });
 
-            meetupSessionDataService.getMeetupSessionList().then(function(results){
+            meetupSessionDataService.getMeetupSessionList($scope.includePastSessions).then(function(results){
+
                 $ionicLoading.hide();
+                $scope.sessions = [];
                 if(results && _.isArray(results)){
                     _.each(results, function(item){
                         $scope.sessions.push({
@@ -27,7 +31,6 @@ angular.module('herd.controllers', [])
                             }
                         );
                     });
-
                 }
             }, function(error){
                 $ionicLoading.hide();
@@ -36,6 +39,11 @@ angular.module('herd.controllers', [])
         }
 
         getMeetupSessionList();
+
+        $scope.updateMeetupSessionList = function(){
+            $scope.includePastSessions = !$scope.includePastSessions;
+            getMeetupSessionList();
+        };
 
         $scope.goToDetails = function(item){
             stateManager.selectedMeetupSession = item;
