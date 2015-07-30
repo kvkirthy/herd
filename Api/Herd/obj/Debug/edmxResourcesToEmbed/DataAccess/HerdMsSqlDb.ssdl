@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MsSqlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FeedbackQuestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AdditionalDetails" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="FeedbackQuestionAndMeetupSession">
+    <Key>
+      <PropertyRef Name="MeetupSessionId" />
+      <PropertyRef Name="FeedbackQuestionId" />
+    </Key>
+    <Property Name="MeetupSessionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FeedbackQuestionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FeedbackQuestionResponse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MeetupSessionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FeedbackQuestionId" Type="int" Nullable="false" />
+    <Property Name="Rating" Type="smallint" />
+    <Property Name="FeedbackWriteup" Type="nvarchar(max)" />
+    <Property Name="AdditionalDetails" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="MeetupSessions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SessionTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MeetupIdentifier" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdditionalDetails" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="OAuthUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Key" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdditionalData" Type="nvarchar" MaxLength="50" />
+    <Property Name="DataTimeKeyObtained" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FeedbackQuestionAndMeetupSession_FeedbackQuestion">
+    <End Role="FeedbackQuestion" Type="Self.FeedbackQuestion" Multiplicity="1" />
+    <End Role="FeedbackQuestionAndMeetupSession" Type="Self.FeedbackQuestionAndMeetupSession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeedbackQuestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FeedbackQuestionAndMeetupSession">
+        <PropertyRef Name="FeedbackQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FeedbackQuestionAndMeetupSession_MeetupSession' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FeedbackQuestionAndMeetupSession_MeetupSession" />-->
+  <Association Name="FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession">
+    <End Role="FeedbackQuestionAndMeetupSession" Type="Self.FeedbackQuestionAndMeetupSession" Multiplicity="1" />
+    <End Role="FeedbackQuestionResponse" Type="Self.FeedbackQuestionResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeedbackQuestionAndMeetupSession">
+        <PropertyRef Name="MeetupSessionId" />
+        <PropertyRef Name="FeedbackQuestionId" />
+      </Principal>
+      <Dependent Role="FeedbackQuestionResponse">
+        <PropertyRef Name="MeetupSessionId" />
+        <PropertyRef Name="FeedbackQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MsSqlModelStoreContainer">
+    <EntitySet Name="FeedbackQuestion" EntityType="Self.FeedbackQuestion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FeedbackQuestionAndMeetupSession" EntityType="Self.FeedbackQuestionAndMeetupSession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FeedbackQuestionResponse" EntityType="Self.FeedbackQuestionResponse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MeetupSessions" EntityType="Self.MeetupSessions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OAuthUsers" EntityType="Self.OAuthUsers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FeedbackQuestionAndMeetupSession_FeedbackQuestion" Association="Self.FeedbackQuestionAndMeetupSession_FeedbackQuestion">
+      <End Role="FeedbackQuestion" EntitySet="FeedbackQuestion" />
+      <End Role="FeedbackQuestionAndMeetupSession" EntitySet="FeedbackQuestionAndMeetupSession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession" Association="Self.FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession">
+      <End Role="FeedbackQuestionAndMeetupSession" EntitySet="FeedbackQuestionAndMeetupSession" />
+      <End Role="FeedbackQuestionResponse" EntitySet="FeedbackQuestionResponse" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

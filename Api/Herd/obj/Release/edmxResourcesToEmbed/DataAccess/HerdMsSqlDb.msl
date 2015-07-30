@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MsSqlModelStoreContainer" CdmEntityContainer="HerdMsSqlEntities">
+    <EntitySetMapping Name="FeedbackQuestions">
+      <EntityTypeMapping TypeName="MsSqlModel.FeedbackQuestion">
+        <MappingFragment StoreEntitySet="FeedbackQuestion">
+          <ScalarProperty Name="AdditionalDetails" ColumnName="AdditionalDetails" />
+          <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeedbackQuestionAndMeetupSessions">
+      <EntityTypeMapping TypeName="MsSqlModel.FeedbackQuestionAndMeetupSession">
+        <MappingFragment StoreEntitySet="FeedbackQuestionAndMeetupSession">
+          <ScalarProperty Name="FeedbackQuestionId" ColumnName="FeedbackQuestionId" />
+          <ScalarProperty Name="MeetupSessionId" ColumnName="MeetupSessionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeedbackQuestionResponses">
+      <EntityTypeMapping TypeName="MsSqlModel.FeedbackQuestionResponse">
+        <MappingFragment StoreEntitySet="FeedbackQuestionResponse">
+          <ScalarProperty Name="AdditionalDetails" ColumnName="AdditionalDetails" />
+          <ScalarProperty Name="FeedbackWriteup" ColumnName="FeedbackWriteup" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="FeedbackQuestionId" ColumnName="FeedbackQuestionId" />
+          <ScalarProperty Name="MeetupSessionId" ColumnName="MeetupSessionId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeetupSessions">
+      <EntityTypeMapping TypeName="MsSqlModel.MeetupSession">
+        <MappingFragment StoreEntitySet="MeetupSessions">
+          <ScalarProperty Name="AdditionalDetails" ColumnName="AdditionalDetails" />
+          <ScalarProperty Name="MeetupIdentifier" ColumnName="MeetupIdentifier" />
+          <ScalarProperty Name="SessionTitle" ColumnName="SessionTitle" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OAuthUsers">
+      <EntityTypeMapping TypeName="MsSqlModel.OAuthUser">
+        <MappingFragment StoreEntitySet="OAuthUsers">
+          <ScalarProperty Name="DataTimeKeyObtained" ColumnName="DataTimeKeyObtained" />
+          <ScalarProperty Name="AdditionalData" ColumnName="AdditionalData" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

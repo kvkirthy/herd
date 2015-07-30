@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MsSqlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HerdMsSqlEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FeedbackQuestions" EntityType="MsSqlModel.FeedbackQuestion" />
+    <EntitySet Name="FeedbackQuestionAndMeetupSessions" EntityType="MsSqlModel.FeedbackQuestionAndMeetupSession" />
+    <EntitySet Name="FeedbackQuestionResponses" EntityType="MsSqlModel.FeedbackQuestionResponse" />
+    <EntitySet Name="MeetupSessions" EntityType="MsSqlModel.MeetupSession" />
+    <EntitySet Name="OAuthUsers" EntityType="MsSqlModel.OAuthUser" />
+    <AssociationSet Name="FeedbackQuestionAndMeetupSession_FeedbackQuestion" Association="MsSqlModel.FeedbackQuestionAndMeetupSession_FeedbackQuestion">
+      <End Role="FeedbackQuestion" EntitySet="FeedbackQuestions" />
+      <End Role="FeedbackQuestionAndMeetupSession" EntitySet="FeedbackQuestionAndMeetupSessions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession" Association="MsSqlModel.FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession">
+      <End Role="FeedbackQuestionAndMeetupSession" EntitySet="FeedbackQuestionAndMeetupSessions" />
+      <End Role="FeedbackQuestionResponse" EntitySet="FeedbackQuestionResponses" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="FeedbackQuestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AdditionalDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FeedbackQuestionAndMeetupSessions" Relationship="MsSqlModel.FeedbackQuestionAndMeetupSession_FeedbackQuestion" FromRole="FeedbackQuestion" ToRole="FeedbackQuestionAndMeetupSession" />
+  </EntityType>
+  <EntityType Name="FeedbackQuestionAndMeetupSession">
+    <Key>
+      <PropertyRef Name="MeetupSessionId" />
+      <PropertyRef Name="FeedbackQuestionId" />
+    </Key>
+    <Property Name="MeetupSessionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FeedbackQuestionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FeedbackQuestion" Relationship="MsSqlModel.FeedbackQuestionAndMeetupSession_FeedbackQuestion" FromRole="FeedbackQuestionAndMeetupSession" ToRole="FeedbackQuestion" />
+    <NavigationProperty Name="FeedbackQuestionResponses" Relationship="MsSqlModel.FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession" FromRole="FeedbackQuestionAndMeetupSession" ToRole="FeedbackQuestionResponse" />
+  </EntityType>
+  <EntityType Name="FeedbackQuestionResponse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MeetupSessionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FeedbackQuestionId" Type="Int32" Nullable="false" />
+    <Property Name="Rating" Type="Int16" />
+    <Property Name="FeedbackWriteup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AdditionalDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FeedbackQuestionAndMeetupSession" Relationship="MsSqlModel.FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession" FromRole="FeedbackQuestionResponse" ToRole="FeedbackQuestionAndMeetupSession" />
+  </EntityType>
+  <EntityType Name="MeetupSession">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SessionTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MeetupIdentifier" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdditionalDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OAuthUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdditionalData" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DataTimeKeyObtained" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FeedbackQuestionAndMeetupSession_FeedbackQuestion">
+    <End Type="MsSqlModel.FeedbackQuestion" Role="FeedbackQuestion" Multiplicity="1" />
+    <End Type="MsSqlModel.FeedbackQuestionAndMeetupSession" Role="FeedbackQuestionAndMeetupSession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeedbackQuestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FeedbackQuestionAndMeetupSession">
+        <PropertyRef Name="FeedbackQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession">
+    <End Type="MsSqlModel.FeedbackQuestionAndMeetupSession" Role="FeedbackQuestionAndMeetupSession" Multiplicity="1" />
+    <End Type="MsSqlModel.FeedbackQuestionResponse" Role="FeedbackQuestionResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeedbackQuestionAndMeetupSession">
+        <PropertyRef Name="MeetupSessionId" />
+        <PropertyRef Name="FeedbackQuestionId" />
+      </Principal>
+      <Dependent Role="FeedbackQuestionResponse">
+        <PropertyRef Name="MeetupSessionId" />
+        <PropertyRef Name="FeedbackQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

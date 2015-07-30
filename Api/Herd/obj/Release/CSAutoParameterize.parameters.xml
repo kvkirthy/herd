@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="HerdMsSqlEntities-Web.config Connection String" description="HerdMsSqlEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DataAccess.HerdMsSqlDb.csdl|res://*/DataAccess.HerdMsSqlDb.ssdl|res://*/DataAccess.HerdMsSqlDb.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=z5419mc0wz.database.windows.net;initial catalog=Herd-Hyd_db;persist security info=True;user id=kvkirthy;password=Bluecap@5;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Me\\Herd\\Api\\Herd\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='HerdMsSqlEntities']/@connectionString" />
+  </parameter>
+</parameters>

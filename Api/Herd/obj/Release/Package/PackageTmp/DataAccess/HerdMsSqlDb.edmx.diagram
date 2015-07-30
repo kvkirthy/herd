@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="31db38b4b7574bf8945cb58f7ba42269" Name="Diagram1">
+        <EntityTypeShape EntityType="MsSqlModel.FeedbackQuestion" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="MsSqlModel.FeedbackQuestionAndMeetupSession" Width="2.625" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="MsSqlModel.FeedbackQuestionResponse" Width="2.125" PointX="7.75" PointY="1" />
+        <EntityTypeShape EntityType="MsSqlModel.MeetupSession" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MsSqlModel.OAuthUser" Width="1.5" PointX="2.75" PointY="4.75" />
+        <AssociationConnector Association="MsSqlModel.FeedbackQuestionAndMeetupSession_FeedbackQuestion" />
+        <AssociationConnector Association="MsSqlModel.FK_FeedbackQuestionResponse_FeedbackQuestionAndMeetupSession" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
