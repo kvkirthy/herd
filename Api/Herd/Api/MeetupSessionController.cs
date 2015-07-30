@@ -9,16 +9,16 @@ namespace Herd.Api
     {
         [Route("meetupSession/{meetupSessionId}/feedbackQuestions")]
         [HttpGet]
-        public List<string> GetSessionFeedbackQuestions(string meetupSessionId)
+        public List<dynamic> GetSessionFeedbackQuestions(string meetupSessionId)
         {
             return new MeetupSessionDataAccess().GetMeetupSessionFeedbackQuestions(meetupSessionId);
         }
 
         [Route("meetupSession/feedbackResponse")]
         [HttpPost]
-        public bool AddFeedbackResponse(FeedbackResponse feedbackResponse)
-        {
-            return false;
+        public bool AddFeedbackResponse(List<FeedbackResponse> feedbackResponse)
+        {            
+            return new MeetupSessionDataAccess().AddNewFeedbackResponse(feedbackResponse);
         }
     }
 }

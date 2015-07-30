@@ -123,6 +123,7 @@
     <Content Include="DataAccess\HerdMsSqlDb.edmx.diagram">
       <DependentUpon>HerdMsSqlDb.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Herd-Hyd %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Herd-Hyd.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

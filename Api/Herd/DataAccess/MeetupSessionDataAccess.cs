@@ -12,11 +12,11 @@ namespace Herd.DataAccess
     {
         private HerdMsSqlEntities _dbContext = new HerdMsSqlEntities();
 
-        public List<string> GetMeetupSessionFeedbackQuestions(string sessionId)
+        public List<dynamic> GetMeetupSessionFeedbackQuestions(string sessionId)
         {
             try
             {
-                var results = new List<string>();
+                var results = new List<dynamic>();
 
                 var feedbackQuestionReferences = _dbContext.FeedbackQuestionAndMeetupSessions.Where(p => p.MeetupSessionId == sessionId);               
                 
@@ -26,7 +26,11 @@ namespace Herd.DataAccess
 
                     feedbackQuestionReferences.ToList().ForEach(x =>
                     {
-                        results.Add(x.FeedbackQuestion.QuestionText);
+                        results.Add(new
+                        {
+                            id = x.FeedbackQuestionId,
+                            Question = x.FeedbackQuestion.QuestionText
+                        });
                     });
 
                     return results;
@@ -45,17 +49,21 @@ namespace Herd.DataAccess
             }
         }
 
-        public bool AddNewFeedbackResponse(FeedbackResponse feedbackResponse)
+        public bool AddNewFeedbackResponse(List<FeedbackResponse> feedbackResponse)
         {
             try
             {
-                _dbContext.FeedbackQuestionResponses.Add(new FeedbackQuestionResponse
+                feedbackResponse.ForEach(x => _dbContext.FeedbackQuestionResponses.Add(new FeedbackQuestionResponse
                 {
-                    MeetupSessionId = feedbackResponse.MeetupSessionId,
-                    FeedbackQuestionId = feedbackResponse.QuestionId,
-                    Rating = feedbackResponse.Rating
+                    MeetupSessionId = x.MeetupSessionId,
+                    FeedbackQuestionId = x.QuestionId,
+                    Rating = x.Rating,
+                    FeedbackWriteup = x.Comments
 
-                });
+                }));
+                
+                _dbContext.SaveChanges();
+
                 return true;
             }
             catch(Exception exception)
