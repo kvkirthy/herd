@@ -52,8 +52,8 @@ angular.module('herd.controllers', [])
     $scope.getActions = function(){
         $ionicActionSheet.show({
             buttons: [
-                { text: 'Feedback' },
-                { text: 'Share' }
+                { text: 'Feedback' }//,
+                //{ text: 'Share' }
             ],
             titleText: 'Actions',
             cancelText: 'Cancel',
@@ -71,9 +71,35 @@ angular.module('herd.controllers', [])
 
 })
 
-.controller('meetupSessionFeedback', function($scope, meetupSessionDataService, stateManager, $ionicLoading){
+.controller('meetupSessionFeedback', function($scope, meetupSessionDataService, stateManager, $ionicLoading, $window, $ionicPopup){
 
         $scope.isPageReady = false;
+
+        $scope.submitFeedback = function(){
+            var feedbackFeed = [];
+            _.each($scope.questions, function(question){
+                feedbackFeed.push({
+                    meetupSessionId: (stateManager.selectedMeetupSession || {}).id,
+                    questionId: question.id,
+                    rating: question.rating,
+                    comments: question.comments
+                });
+            });
+            meetupSessionDataService.addFeedbackForMeetupSession(feedbackFeed).then(function(){
+                $ionicPopup.alert({
+                    title: 'Done',
+                    template: 'Thanks for your feedback. Your opinion is very important for us.'
+                }).then(function () {
+                    $window.history.back();
+                });
+
+            }, function(){
+                $ionicPopup.alert({
+                    title: 'Oops',
+                    template: 'This is embarrassing. We couldn’t save your feedback. Can you check your network connection?'
+                })
+            });
+        }
 
         function getFeedbackQuestions(){
             $ionicLoading.show({

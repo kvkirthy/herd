@@ -13,6 +13,25 @@ angular.module('herd.services', [])
             return deferred.promise;
         };
 
+        this.addFeedbackForMeetupSession = function(feedbackData){
+            var deferred = $q.defer();
+            $http({
+                "url":'https://herd-hyd.azurewebsites.net/meetupSession/feedbackResponse',
+                "headers":{
+                    "Content-Type":"application/json",
+                },
+                "method": "POST",
+                data: feedbackData
+            }).success(function(data){
+                deferred.resolve(data.results);
+            })
+            .error(function(error){
+                deferred.reject(error);
+            });
+            return deferred.promise;
+
+        };
+
         this.getFeedbackQuestions =function(sessionId){
             var deferred = $q.defer();
             $http.get('https://herd-hyd.azurewebsites.net/meetupSession/' + sessionId + '/feedbackQuestions')

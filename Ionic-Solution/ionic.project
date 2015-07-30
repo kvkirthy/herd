@@ -5,5 +5,6 @@
     {
       "path": "#/tab/home",
       "proxyUrl": "https://api.meetup.com"
-    }]
+    }
+  ]
 }
