@@ -20,5 +20,6 @@ namespace Herd.DataAccess
         public string Details { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateExpires { get; set; }
+        public Nullable<bool> HasExpired { get; set; }
     }
 }

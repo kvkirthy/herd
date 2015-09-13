@@ -10,6 +10,7 @@
     <Property Name="Details" Type="nvarchar(max)" />
     <Property Name="DateCreated" Type="datetime" />
     <Property Name="DateExpires" Type="datetime" />
+    <Property Name="HasExpired" Type="bit" />
   </EntityType>
   <EntityType Name="FeedbackQuestion">
     <Key>

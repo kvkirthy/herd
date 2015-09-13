@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Herd.DataAccess
 {
@@ -15,7 +13,7 @@ namespace Herd.DataAccess
         {
             try
             {
-                return _dbContext.Announcements.ToList(); 
+                return _dbContext.Announcements.Where( p => p.HasExpired != true ).ToList(); 
             }
             catch (Exception exception)
             {

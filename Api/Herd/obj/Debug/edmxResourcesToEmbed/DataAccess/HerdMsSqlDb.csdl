@@ -102,5 +102,6 @@
     <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DateCreated" Type="DateTime" Precision="3" />
     <Property Name="DateExpires" Type="DateTime" Precision="3" />
+    <Property Name="HasExpired" Type="Boolean" />
   </EntityType>
 </Schema>

@@ -54,6 +54,7 @@
     <EntitySetMapping Name="Announcements">
       <EntityTypeMapping TypeName="MsSqlModel.Announcement">
         <MappingFragment StoreEntitySet="Announcements">
+          <ScalarProperty Name="HasExpired" ColumnName="HasExpired" />
           <ScalarProperty Name="DateExpires" ColumnName="DateExpires" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="Details" ColumnName="Details" />
