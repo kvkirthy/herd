@@ -1,0 +1,18 @@
+<ion-view view-title="Announcements">
+  <ion-content style="background: #e8ebf1;" class="padding">
+    <div class="list card" ng-repeat="announcement in announcements">
+      <div class="item item-avatar">
+        <img src="img/users-header.png">
+        <h2>{{announcement.title}}</h2>
+        <p>
+          {{announcement.subTitle}}
+        </p>
+      </div>
+      <div class="item item-body">
+        <p>
+         {{announcement.details}}
+        </p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

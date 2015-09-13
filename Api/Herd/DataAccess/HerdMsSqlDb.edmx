@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MsSqlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Announcements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="256" />
+          <Property Name="SubTitle" Type="nvarchar" MaxLength="256" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="DateExpires" Type="datetime" />
+        </EntityType>
         <EntityType Name="FeedbackQuestion">
           <Key>
             <PropertyRef Name="Id" />
@@ -81,6 +92,7 @@ warning 6035: The relationship 'FeedbackQuestionAndMeetupSession_MeetupSession' 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MsSqlModelStoreContainer">
+          <EntitySet Name="Announcements" EntityType="Self.Announcements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeedbackQuestion" EntityType="Self.FeedbackQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeedbackQuestionAndMeetupSession" EntityType="Self.FeedbackQuestionAndMeetupSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeedbackQuestionResponse" EntityType="Self.FeedbackQuestionResponse" Schema="dbo" store:Type="Tables" />
@@ -113,6 +125,7 @@ warning 6035: The relationship 'FeedbackQuestionAndMeetupSession_MeetupSession' 
             <End Role="FeedbackQuestionAndMeetupSession" EntitySet="FeedbackQuestionAndMeetupSessions" />
             <End Role="FeedbackQuestionResponse" EntitySet="FeedbackQuestionResponses" />
           </AssociationSet>
+          <EntitySet Name="Announcements" EntityType="MsSqlModel.Announcement" />
         </EntityContainer>
         <EntityType Name="FeedbackQuestion">
           <Key>
@@ -190,6 +203,17 @@ warning 6035: The relationship 'FeedbackQuestionAndMeetupSession_MeetupSession' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="DateExpires" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -242,6 +266,18 @@ warning 6035: The relationship 'FeedbackQuestionAndMeetupSession_MeetupSession' 
                 <ScalarProperty Name="AdditionalData" ColumnName="AdditionalData" />
                 <ScalarProperty Name="Key" ColumnName="Key" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Announcements">
+            <EntityTypeMapping TypeName="MsSqlModel.Announcement">
+              <MappingFragment StoreEntitySet="Announcements">
+                <ScalarProperty Name="DateExpires" ColumnName="DateExpires" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

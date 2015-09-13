@@ -14,6 +14,7 @@
       <End Role="FeedbackQuestionAndMeetupSession" EntitySet="FeedbackQuestionAndMeetupSessions" />
       <End Role="FeedbackQuestionResponse" EntitySet="FeedbackQuestionResponses" />
     </AssociationSet>
+    <EntitySet Name="Announcements" EntityType="MsSqlModel.Announcement" />
   </EntityContainer>
   <EntityType Name="FeedbackQuestion">
     <Key>
@@ -91,4 +92,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Announcement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="SubTitle" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="DateExpires" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

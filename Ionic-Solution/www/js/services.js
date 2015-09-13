@@ -78,4 +78,25 @@ angular.module('herd.services', [])
             return deferred.promise;
         };
 
-    });
+    })
+
+.service('announcementService', function($q, $http, $window){
+    this.getAnnouncements = function(){
+        var deferred = $q.defer();
+
+        $http({
+            "url":'https://herd-hyd.azurewebsites.net/announcements',
+            "headers":{
+                "Content-Type":"application/json",
+            },
+            "method": "GET"
+        }).success(function(data){
+            deferred.resolve(data);
+        })
+        .error(function(error){
+            deferred.reject(error);
+        });
+
+        return deferred.promise;
+    };
+});

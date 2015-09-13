@@ -136,7 +136,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AnnouncementsController.cs" />
     <Compile Include="Api\MeetupSessionController.cs" />
+    <Compile Include="DataAccess\Announcement.cs">
+      <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\AnnouncementsDataAccess.cs" />
     <Compile Include="DataAccess\FeedbackQuestion.cs">
       <DependentUpon>HerdMsSqlDb.tt</DependentUpon>
     </Compile>

@@ -128,4 +128,17 @@ angular.module('herd.controllers', [])
         getFeedbackQuestions();
     })
 
+.controller('announcementController', function($scope, announcementService, $ionicLoading){
+
+    $ionicLoading.show({
+        noBackdrop: false,
+        template: '<p class="text-center"><div><ion-spinner icon="lines"/></div> <span style="font-size:9pt;">Working on it...</span></p>'
+    });
+
+    announcementService.getAnnouncements()
+        .then(function(result){
+            $ionicLoading.hide();
+            $scope.announcements = result;
+    });
+})
 ;

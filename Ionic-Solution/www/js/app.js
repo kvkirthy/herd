@@ -94,11 +94,12 @@ angular.module('herd', [
   })
 
   // Ionic User tab
-  .state('tab.user', {
-    url: '/user',
+  .state('tab.announcements', {
+    url: '/announcements',
     views: {
-      'tab-user': {
-        templateUrl: 'templates/tab-user.html'
+      'tab-announcements': {
+        templateUrl: 'templates/tab-announcements.html',
+        controller: 'announcementController'
       }
     }
   })

@@ -30,5 +30,6 @@ namespace Herd.DataAccess
         public virtual DbSet<FeedbackQuestionResponse> FeedbackQuestionResponses { get; set; }
         public virtual DbSet<MeetupSession> MeetupSessions { get; set; }
         public virtual DbSet<OAuthUser> OAuthUsers { get; set; }
+        public virtual DbSet<Announcement> Announcements { get; set; }
     }
 }

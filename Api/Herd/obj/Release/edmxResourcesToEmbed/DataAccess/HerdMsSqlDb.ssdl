@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MsSqlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Announcements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="256" />
+    <Property Name="SubTitle" Type="nvarchar" MaxLength="256" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateExpires" Type="datetime" />
+  </EntityType>
   <EntityType Name="FeedbackQuestion">
     <Key>
       <PropertyRef Name="Id" />
@@ -76,6 +87,7 @@ warning 6035: The relationship 'FeedbackQuestionAndMeetupSession_MeetupSession' 
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="MsSqlModelStoreContainer">
+    <EntitySet Name="Announcements" EntityType="Self.Announcements" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FeedbackQuestion" EntityType="Self.FeedbackQuestion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FeedbackQuestionAndMeetupSession" EntityType="Self.FeedbackQuestionAndMeetupSession" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FeedbackQuestionResponse" EntityType="Self.FeedbackQuestionResponse" Schema="dbo" store:Type="Tables" />
