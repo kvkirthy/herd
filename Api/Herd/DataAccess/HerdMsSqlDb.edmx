@@ -16,6 +16,7 @@
           <Property Name="DateCreated" Type="datetime" />
           <Property Name="DateExpires" Type="datetime" />
           <Property Name="HasExpired" Type="bit" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="FeedbackQuestion">
           <Key>
@@ -215,6 +216,7 @@ warning 6035: The relationship 'FeedbackQuestionAndMeetupSession_MeetupSession' 
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="DateExpires" Type="DateTime" Precision="3" />
           <Property Name="HasExpired" Type="Boolean" />
+          <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -275,6 +277,7 @@ warning 6035: The relationship 'FeedbackQuestionAndMeetupSession_MeetupSession' 
           <EntitySetMapping Name="Announcements">
             <EntityTypeMapping TypeName="MsSqlModel.Announcement">
               <MappingFragment StoreEntitySet="Announcements">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="HasExpired" ColumnName="HasExpired" />
                 <ScalarProperty Name="DateExpires" ColumnName="DateExpires" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />

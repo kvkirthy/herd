@@ -2,7 +2,7 @@
   <ion-content style="background: #e8ebf1;" class="padding">
     <div class="list card" ng-repeat="announcement in announcements">
       <div class="item item-avatar">
-        <img src="img/users-header.png">
+        <img src="img/users-header.png" ng-src="{{announcement.imageUrl}}">
         <h2>{{announcement.title}}</h2>
         <p>
           {{announcement.subTitle}}

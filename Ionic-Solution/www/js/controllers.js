@@ -53,9 +53,16 @@ angular.module('herd.controllers', [])
 
 })
 
-.controller('meetupSessionDetailsController', function($scope, stateManager, $ionicActionSheet, $state){
+.controller('meetupSessionDetailsController', function($scope, stateManager, $ionicActionSheet, $state, meetupSessionDataService){
 
     $scope.selectedMeetupSession = stateManager.selectedMeetupSession;
+    
+    $scope.logo = "img/users-header.png";
+    
+    meetupSessionDataService.getSessionPhoto($scope.selectedMeetupSession.id). then(function(result){
+        $scope.logo = result.highres_link;
+    });
+
 
     $scope.getActions = function(){
         $ionicActionSheet.show({
@@ -128,7 +135,7 @@ angular.module('herd.controllers', [])
         getFeedbackQuestions();
     })
 
-.controller('announcementController', function($scope, announcementService, $ionicLoading){
+.controller('announcementController', function($scope, announcementService, $ionicLoading, $ionicPopup){
 
     $ionicLoading.show({
         noBackdrop: false,
@@ -139,6 +146,12 @@ angular.module('herd.controllers', [])
         .then(function(result){
             $ionicLoading.hide();
             $scope.announcements = result;
+        }, function(error){
+            $ionicPopup.alert({
+                    title: 'Oops',
+                    template: 'Apologies, couldn\'t load Announcements. Are you connected to the Internet?' 
+                });
+            $ionicLoading.hide();
     });
 })
 ;

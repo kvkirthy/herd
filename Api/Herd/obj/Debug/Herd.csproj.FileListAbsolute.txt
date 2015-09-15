@@ -92,3 +92,4 @@ C:\Me\Herd\Api\Herd\bin\System.Web.Http.Owin.xml
 C:\Me\Herd\Api\Herd\bin\System.Web.Http.WebHost.xml
 C:\Me\Herd\Api\Herd\obj\Debug\Herd.dll
 C:\Me\Herd\Api\Herd\obj\Debug\Herd.pdb
+C:\Me\Herd\Api\Herd\obj\Debug\Herd.csprojResolveAssemblyReference.cache

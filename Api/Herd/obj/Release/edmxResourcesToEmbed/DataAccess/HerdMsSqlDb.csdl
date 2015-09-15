@@ -103,5 +103,6 @@
     <Property Name="DateCreated" Type="DateTime" Precision="3" />
     <Property Name="DateExpires" Type="DateTime" Precision="3" />
     <Property Name="HasExpired" Type="Boolean" />
+    <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

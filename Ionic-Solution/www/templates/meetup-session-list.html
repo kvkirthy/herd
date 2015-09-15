@@ -4,8 +4,7 @@
           <ion-toggle ng-model="includePastSessions" ng-checked="includePastSessions" ng-change="updateMeetupSessionList()" toggle-class="toggle-calm">Include past sessions</ion-toggle>
 
           <ion-list >
-              <ion-item ng-repeat="session in sessions" class="item item-avatar-left" ng-click="goToDetails(session)">
-                  <img src="{{session.imageUrl}}" />
+              <ion-item ng-repeat="session in sessions" class="item" ng-click="goToDetails(session)">
                   <h2>{{session.title}}</h2>
                   <p >
                       <span ng-if="session.rsvpCount">{{session.rsvpCount}} are joining the session.</span>

@@ -11,6 +11,7 @@
     <Property Name="DateCreated" Type="datetime" />
     <Property Name="DateExpires" Type="datetime" />
     <Property Name="HasExpired" Type="bit" />
+    <Property Name="ImageUrl" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="FeedbackQuestion">
     <Key>

@@ -39,6 +39,22 @@ angular.module('herd.services', [])
 
         };
 
+        this.getSessionPhoto =function(sessionId){
+            var deferred = $q.defer();
+            var url="https://api.meetup.com/2/photos?offset=0&format=json&event_id=" + sessionId + "&photo-host=public&page=20&fields=&order=time&desc=True&sig_id=109863862&sig=1f65756819e717059e351048bbb6e7930ca66caf";
+
+            $http.get(url)
+                .success(function(data){
+                    deferred.resolve(_.find((data.results || []), function(item){
+                        return item.caption.toLowerCase() === 'logo';
+                    }));
+                })
+                .error(function(error){
+                    deferred.reject(error);
+                });
+            return deferred.promise;
+        }
+
         this.getFeedbackQuestions =function(sessionId){
             var deferred = $q.defer();
             $http.get('https://herd-hyd.azurewebsites.net/meetupSession/' + sessionId + '/feedbackQuestions')
@@ -49,7 +65,7 @@ angular.module('herd.services', [])
                     deferred.reject(error);
                 });
             return deferred.promise;
-        }
+        };
     })
 
 .service('oAuthService', function($q, $http, $window){
@@ -85,7 +101,7 @@ angular.module('herd.services', [])
         var deferred = $q.defer();
 
         $http({
-            "url":'https://herd-hyd.azurewebsites.net/announcements',
+            "url":"https://herd-hyd.azurewebsites.net/announcements",
             "headers":{
                 "Content-Type":"application/json",
             },
