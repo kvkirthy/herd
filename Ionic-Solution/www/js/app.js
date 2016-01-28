@@ -63,6 +63,16 @@ angular.module('herd', [
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+  // Ionic Home
+  .state('launchScreen', {
+    url: '/launch',
+    views: {
+      'launch': {
+        templateUrl: 'templates/home.html'
+      }
+    }
+  })
+
   // setup an abstract state for the tabs directive
   .state('tab', {
     url: "/tab",
@@ -115,6 +125,6 @@ angular.module('herd', [
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('launch/');
 
 });

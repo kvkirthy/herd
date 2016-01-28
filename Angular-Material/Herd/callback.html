@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>&nbsp;</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var queryString = window.location.href.split("#")[1];
+		var values = (queryString || "").split("&");
+		for(var index in values){
+			if(values[index].indexOf("access_token") >= 0){
+				var accessToken = values[index].split("=")[1];
+				if(accessToken){
+					document.cookie = "accessToken=" + accessToken;
+					debugger;
+					window.close();
+				}
+				else{
+					document.getElementById("message").innerHtml("<h2>Error getting authorization from Meetup.</h2>")
+				}
+			}
+		}
+	</script>
+
+	<div id="message">
+		
+	</div>
+
+</body>
+</html>

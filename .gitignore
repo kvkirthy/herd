@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+bower_components
+.idea/
+bin
+obj
+*.suo
+*.user
+*.zip
+
+# Webstorm project file
+.idea
